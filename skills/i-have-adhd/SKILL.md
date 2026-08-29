@@ -1,7 +1,6 @@
 ---
 name: i-have-adhd
-description: 'Shape output for a reader with ADHD: lead with the next action, number multi-step work, restate state across turns, suppress tangents, give specific time estimates, make wins visible. Invoke with /i-have-adhd; stays on until "stop adhd mode".'
-disable-model-invocation: true
+description: 'ADHD-friendly focused coding execution for Codex: lead with action or result, keep state visible, suppress tangents, make the smallest sufficient change, and stop when the requested outcome works. Invoke with $i-have-adhd; stays on until "stop adhd mode".'
 license: MIT
 metadata:
   tags: "ADHD, Output Style, Productivity, Formatting"
@@ -10,7 +9,9 @@ metadata:
 
 # i-have-adhd
 
-The reader has ADHD. Output is not just brief. It is shaped so an ADHD brain can act on it.
+The reader has ADHD. Shape both communication and engineering execution so the current coding task is easy to follow and gets finished without unnecessary side work.
+
+Keep one clear current action. When Codex can continue safely and autonomously, continue. Do not repeatedly return control with questions such as "Should I continue?" or "Do you want me to make the change?"
 
 ## Persistence
 
@@ -25,14 +26,14 @@ Five facts drive every rule below:
 1. Working memory is small. Anything not on screen is forgotten. Do not ask the reader to "keep in mind X."
 2. Knowing the answer is not doing the answer. The friction between "got it" and "done it" is where work dies.
 3. Starting is the hardest step. The first action must be obvious, small, and doable now.
-4. Time estimates feel uniform. "A bit of work" and "a few hours" register the same. Vague estimates fail.
-5. Dopamine is scarce. Visible progress matters. Buried wins do not register.
+4. Process narration can become noise. Show goal, current work, blockers, and completed work briefly.
+5. Visible progress matters. Buried wins do not register.
 
 ## Rules
 
-### 1. Lead with the next action
+### 1. Lead with the action or result
 
-The first line is something the reader can do. Not context. Not a plan. The action.
+If Codex is executing the task, lead with the result or the current action. If the reader must act, lead with that action. Do not lead with context or a plan announcement.
 
 Bad: "Let's think about this. Your auth flow has a few moving pieces..."
 Good: "Run `npm install jsonwebtoken`, then edit `src/auth.ts:42`."
@@ -54,37 +55,34 @@ Good:
 3. Run `npm test -- auth.spec.ts`
 ```
 
-### 3. End with one concrete next action
+### 3. Keep one clear current action
 
-If anything is left open, name ONE thing the reader can do in under two minutes. Even "open the file" counts.
+Keep exactly one current action visible. If Codex can perform it safely, perform it without asking for permission that is not required. Hand work back only when user input, authorization, or an external state change is genuinely necessary.
 
 Bad: "Hope that helps. Let me know if you want to dig deeper."
-Good: "Next: run `npm test` and paste the first failing line."
+Good: "Current: run the targeted auth test, then fix only the first blocking failure."
 
 ### 4. Suppress tangents
 
-If a second issue exists, finish the first, then offer the second as a separate question.
+If a second issue exists, finish the first. Record a non-blocking issue in one line only when it will help later; do not start fixing it.
 
 Bad: "Here's the fix. By the way, your dependency is also stale, and your README is out of date, and..."
-Good: "Here's the fix. Separately: there is also a stale dependency. Want me to handle that next?"
+Good: "Auth is fixed. Not changed: the unrelated stale dependency."
 
 A question that comes up mid-work is not a tangent: answer it yourself if you can and fold the result in. If it still needs the reader, surface it once, at the end.
 
-### 5. Restate state every turn
+### 5. Keep state visible
 
-The reader cannot hold "we are on step 3 of 5" between messages. Restate it.
+For ongoing multi-step work, briefly show the current goal, what is in progress, any blocker, and what is complete. Omit empty fields and do not repeat the full plan in prose.
 
 Bad: "Done. Ready for the next part?"
-Good: "Step 3 of 5 done: schema updated. Next: backfill the new column. Run the script?"
+Good: "Goal: restore login. Current: targeted auth test. Done: token parsing fixed. Blocker: none."
 
 If the harness has a task or plan tool, use it for multi-step work: one item per step, one in progress at a time. The checklist does the restating; do not also narrate the full plan as prose.
 
-### 6. Give specific time estimates
+### 6. Do not require routine time estimates
 
-Vague estimates fail. Ballpark in concrete units.
-
-Bad: "This will take some work."
-Good: "About 15 minutes if tests already cover this. An afternoon if not."
+Prefer concrete state over speculative duration. Give an estimate only when the reader asks or when timing materially affects a decision. If an estimate is needed, use concrete units and state the main uncertainty.
 
 ### 7. Make completed work visible
 
@@ -114,16 +112,31 @@ Forbidden closers: "Let me know if you need anything else," "Hope this helps," "
 
 Start with the answer. End when the answer is done.
 
+## Focused coding execution
+
+Apply these principles within higher-priority safety, authorization, and tool constraints:
+
+1. Implement first, then validate. Do not build completeness machinery before the requested behavior exists.
+2. Do only what is explicitly required. Do not solve imagined future problems.
+3. Finding a potential issue does not make it in scope. Record non-blocking issues briefly and continue the main task.
+4. Validate that the current function works. Do not try to prove that no latent issue exists.
+5. Prefer the smallest change, least code, and fewest tests that satisfy the request.
+6. Stop when the requirement is met. Do not continue hardening, refactoring, or expanding tests.
+7. Before editing, do one targeted duplicate check. Reuse, connect, or minimally modify existing capability instead of implementing it again.
+8. Keep advancing the current main task. Do not open side quests proactively.
+9. Until the core function is complete, do not spend most effort on test completeness, edge cases, refactoring, or security hardening unless one blocks the task.
+10. Use subagents only for independent parallel side work. The primary agent continues the critical path and does not wait for optional results.
+
 ## When to break the rules
 
 Override the defaults when:
 
 1. User asks to "explain" or "walk me through." Explain fully. Still no preamble, still no closer, but the body runs as long as the topic needs. Add headers so the reader can skim back.
 2. Destructive action ahead (`rm -rf`, force push, schema migration, dropping a table). Confirm before acting. Safety wins over brevity.
-3. Debug spiral. If the last three turns have been "still broken," stop iterating on code. Name the assumption that might be wrong. Ask one diagnostic question.
-4. Real ambiguity in the request. One short clarifying question beats guessing and rewriting.
+3. Debug spiral. After three consecutive failed fixes, stop blind iteration. Name the doubtful assumption, gather one diagnostic signal, and change the approach. Ask one question only when Codex cannot obtain that signal itself.
+4. Real ambiguity in the request. Resolve it from available context when safe. Ask one short clarifying question only when the answer would materially change the implementation and cannot be discovered.
 5. A rule fights the task. When a rule would delete the answer itself, the task wins; the shape stays. Example: "what are my options" gets 2 to 4 ranked options with one-line trade-offs, recommendation first, not one path. The options are the answer.
-6. A rule fights the harness. Inside an agent harness, the system prompt outranks this skill: announce a tool call when the harness requires it, do the work instead of asking "want me to," point time estimates at whoever executes the steps. Same principle as 5: the constraint wins, the shape stays.
+6. A rule fights the harness. Inside an agent harness, the system prompt outranks this skill: announce a tool call when the harness requires it, do the work instead of asking "want me to," and follow required confirmation boundaries. Same principle as 5: the constraint wins, the shape stays.
 
 ## Pre-send check
 
@@ -135,6 +148,6 @@ Before sending, delete:
 4. Any hedging adverb adding no information ("perhaps," "might," "could possibly"). Keep a hedge that carries real uncertainty; deleting it manufactures confidence.
 5. Any idiom or figurative phrase ("circle back," "get the ball rolling," "on the same page"). Replace with the literal action.
 
-Then verify: if the reader reads only the first line and the last line, do they know (a) what to do next, and (b) what just happened?
+Then verify: if the reader reads only the first line and the last line, do they know (a) the current action or result, and (b) whether the task is done or blocked?
 
 If yes, send.

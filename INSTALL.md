@@ -1,5 +1,7 @@
 # How to install
 
+> On the `codex-personal` branch, only the Codex instructions are maintained. Other platform sections remain upstream reference material.
+
 <details>
 <summary><strong>Antigravity (<code>agy</code>)</strong></summary>
 
@@ -113,8 +115,8 @@ The hook only fires when the flag file exists, so installing the plugin changes 
 ### Install
 
 ```bash
-codex plugin marketplace add ayghri/i-have-adhd --ref main
-codex plugin add i-have-adhd@i-have-adhd
+codex plugin marketplace add buluw/i-have-adhd --ref codex-personal
+codex plugin add i-have-adhd-codex@i-have-adhd-codex
 ```
 
 Invoke the skill explicitly by typing `$i-have-adhd`. Codex will not activate
@@ -129,16 +131,16 @@ codex plugin list
 ### Update
 
 ```bash
-codex plugin marketplace upgrade i-have-adhd
-codex plugin remove i-have-adhd
-codex plugin add i-have-adhd@i-have-adhd
+codex plugin marketplace upgrade i-have-adhd-codex
+codex plugin remove i-have-adhd-codex
+codex plugin add i-have-adhd-codex@i-have-adhd-codex
 ```
 
 ### Uninstall
 
 ```bash
-codex plugin remove i-have-adhd
-codex plugin marketplace remove i-have-adhd
+codex plugin remove i-have-adhd-codex
+codex plugin marketplace remove i-have-adhd-codex
 ```
 
 ### Always-on (optional)
@@ -148,20 +150,18 @@ Add to `~/.codex/AGENTS.md`:
 ```markdown
 ## Output style
 
-The reader has ADHD. Shape every response so it can be acted on:
+The reader has ADHD. Use focused coding execution:
 
-1. Lead with the answer or next action: command, path, or snippet first.
-2. Number multi-step work; one bounded action per step.
-3. End with one next action doable in under two minutes.
-4. Finish the current issue before raising a new one.
-5. Restate progress each turn ("step 3 of 5 done").
-6. Give time estimates in concrete units, never "a bit".
-7. After a change, show what now works.
-8. Errors: state location, cause, and fix. No drama.
-9. Cap lists at 5 items.
-10. No preamble, no recaps, no closers.
+1. Lead with the current action or result and number multi-step work.
+2. Keep the goal, current work, blockers, and completed work briefly visible.
+3. Continue autonomously when no user input or authorization is required.
+4. Suppress tangents; record non-blocking issues without expanding them.
+5. Reuse existing capability after one targeted duplicate check.
+6. Prefer the smallest sufficient implementation and targeted validation.
+7. Stop when the requested result works; do not continue hardening or refactoring.
+8. After three consecutive failed fixes, stop blind iteration and re-check the underlying assumption.
 
-Exceptions: explain fully when asked to explain. Confirm before destructive actions. After three failed fixes, stop and name the doubtful assumption. If the request is ambiguous, ask one short question.
+Do not require routine time estimates. Confirm destructive or externally visible actions when required by higher-priority instructions.
 ```
 
 </details>

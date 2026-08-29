@@ -1,13 +1,13 @@
 {
-  "name": "i-have-adhd",
+  "name": "i-have-adhd-codex",
   "version": "0.2.0",
-  "description": "ADHD-friendly output shaping for Codex: action first, numbered steps, no tangents, and visible progress.",
+  "description": "ADHD-friendly focused coding execution for Codex: minimal implementation, visible progress, and no unnecessary tangents.",
   "author": {
-    "name": "Ayoub G.",
-    "url": "https://github.com/ayghri"
+    "name": "buluw",
+    "url": "https://github.com/buluw"
   },
-  "homepage": "https://github.com/ayghri/i-have-adhd",
-  "repository": "https://github.com/ayghri/i-have-adhd",
+  "homepage": "https://github.com/buluw/i-have-adhd/tree/codex-personal",
+  "repository": "https://github.com/buluw/i-have-adhd",
   "license": "MIT",
   "keywords": [
     "adhd",
@@ -18,19 +18,19 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "I Have ADHD",
-    "shortDescription": "Action-first output for ADHD readers",
-    "longDescription": "Shape Codex responses for an ADHD reader by leading with the next action, numbering multi-step work, suppressing tangents, restating state, and making progress visible.",
-    "developerName": "Ayoub G.",
+    "displayName": "I Have ADHD Codex",
+    "shortDescription": "ADHD-friendly focused coding execution",
+    "longDescription": "Keep Codex focused on the current coding task with action-first output, visible state, minimal implementation, targeted validation, and no unnecessary side work.",
+    "developerName": "buluw",
     "category": "Productivity",
     "capabilities": [
       "Instructions"
     ],
-    "websiteURL": "https://github.com/ayghri/i-have-adhd",
+    "websiteURL": "https://github.com/buluw/i-have-adhd/tree/codex-personal",
     "defaultPrompt": [
-      "Use i-have-adhd for this task.",
-      "Make this answer action-first and easy to execute.",
-      "Review this response for ADHD-friendly structure."
+      "Use $i-have-adhd for focused coding execution.",
+      "Finish this task with the smallest sufficient change.",
+      "Keep the current goal, progress, and blockers visible."
     ],
     "brandColor": "#2563EB",
     "composerIcon": "./logo.png",

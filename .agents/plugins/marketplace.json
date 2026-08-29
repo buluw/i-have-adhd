@@ -1,15 +1,15 @@
 {
-  "name": "i-have-adhd",
+  "name": "i-have-adhd-codex",
   "interface": {
-    "displayName": "I Have ADHD"
+    "displayName": "I Have ADHD Codex Personal"
   },
   "plugins": [
     {
-      "name": "i-have-adhd",
+      "name": "i-have-adhd-codex",
       "source": {
         "source": "url",
-        "url": "https://github.com/ayghri/i-have-adhd.git",
-        "ref": "main"
+        "url": "https://github.com/buluw/i-have-adhd.git",
+        "ref": "codex-personal"
       },
       "policy": {
         "installation": "AVAILABLE",
