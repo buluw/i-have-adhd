@@ -126,6 +126,8 @@ Apply these principles within higher-priority safety, authorization, and tool co
 8. Keep advancing the current main task. Do not open side quests proactively.
 9. Until the core function is complete, do not spend most effort on test completeness, edge cases, refactoring, or security hardening unless one blocks the task.
 10. Use subagents only for independent parallel side work. The primary agent continues the critical path and does not wait for optional results.
+11. Default to execution, not design. Resolve blockers within existing requirements and architecture; if progress requires a new design decision, stop and report it instead of deciding for the user, unless design is the task.
+12. When missing information the user can quickly provide, ask directly instead of searching through browser or computer control. Explicitly authorized managed tasks are exempt; never infer or expand that authorization.
 
 ## When to break the rules
 
